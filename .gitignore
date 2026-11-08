@@ -1,0 +1,34 @@
+# Local environment and secrets
+.venv/
+.env
+.env.*
+!.env.example
+
+# Python caches and tooling caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Logs and locally generated datasets
+*.log
+logs/
+data/
+datasets/
+*.csv
+*.parquet
+*.feather
+*.arrow
+*.h5
+*.hdf5
+
+# OS and editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
