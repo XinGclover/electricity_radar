@@ -71,3 +71,14 @@ def read_prices(connection, area, first, last):
             (area, SOURCE, end, start)).fetchall()
     except psycopg.Error as exc:
         raise DatabaseError(database_message(exc)) from None
+
+
+def available_dates(connection, area):
+    """Bounds of stored local delivery dates, including incomplete days."""
+    try:
+        return connection.execute(
+            "SELECT min((delivery_start AT TIME ZONE 'Europe/Stockholm')::date), "
+            "max((delivery_start AT TIME ZONE 'Europe/Stockholm')::date) "
+            'FROM market.prices WHERE area=%s AND source=%s', (area, SOURCE)).fetchone()
+    except psycopg.Error as exc:
+        raise DatabaseError(database_message(exc)) from None
